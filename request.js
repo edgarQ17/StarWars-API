@@ -10,8 +10,12 @@ const response = await fetch(url);
 
 // Storing data in form of JSON
 var data = await response.json();
-console.log(data);
-console.log(data.birth_year)
+if(data.homeworld != null ){
+  const hWorld = await fetch(data.homeworld);
+  var world = await hWorld.json();
+  console.log(world)
+
+}
 
 if (response) {
   hideloader();
@@ -29,22 +33,52 @@ document.getElementById('loading').style.display = 'none';
 function show(data) {
 let tab = 
   `<tr>
-    <th>Name</th>
+    <th>Full Name</th>
     <th>Height</th>
     <th>Mass</th>
     <th>Hair Color</th>
     <th>Skin Color</th>
-   </tr>`;
+    <th>Eye Color</th>
+    <th>Birth Year</th>
+    <th>Gender</th>
+   </tr>
+   `;
 
 // Loop to access all rows 
-for (let r of data.list) {
+// for (let r of data.list) {
   tab += `<tr> 
-<td>${r.name} </td>
-<td>${r.office}</td>
-<td>${r.position}</td> 
-<td>${r.salary}</td>          
-</tr>`;
-}
+<td>${data.name} </td>
+<td>${data.height}</td>
+<td>${data.mass}</td> 
+<td>${data.hair_color}</td>
+<td>${data.skin_color}</td>
+<td>${data.eye_color}</td>          
+<td>${data.birth_year}</td>          
+<td>${data.gender}</td>          
+
+</tr>
+<tr>
+    <th>Homeworld</th>
+    <th>Films</th>
+    <th>Species</th>
+    <th>Vehicles</th>
+    <th>Starships</th>
+</tr>
+
+<tr> 
+<td>${data.homeworld} </td>
+<td>${data.films}</td>
+<td>${data.species}</td> 
+<td>${data.vehicles}</td>
+<td>${data.starships}</td>
+<td>${data.eye_color}</td>          
+<td>${data.birth_year}</td>          
+<td>${data.gender}</td>          
+</tr>
+`;
+// }
 // Setting innerHTML as tab variable
-document.getElementById("employees").innerHTML = tab;
-}
+document.getElementById("chName").innerHTML =`<h1>${data.name}</h1>` ;
+document.getElementById("character").innerHTML = tab;
+
+} 
