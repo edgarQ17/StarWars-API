@@ -13,12 +13,20 @@ var data = await response.json();
 if(data.homeworld != null ){
   const hWorld = await fetch(data.homeworld);
   var world = await hWorld.json();
-  console.log(world)
+   this.wname = world.name;
+  console.log(world.name)
 
 }
 
+const films = await fetch(data.films[0]);
+var film = await films.json();
+
+console.log(film)
+
+
 if (response) {
   hideloader();
+  
 
 }
 show(data);
@@ -66,7 +74,7 @@ let tab =
 </tr>
 
 <tr> 
-<td>${data.homeworld} </td>
+<td>${this.wname} </td>
 <td>${data.films}</td>
 <td>${data.species}</td> 
 <td>${data.vehicles}</td>
