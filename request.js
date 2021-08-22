@@ -10,18 +10,45 @@ const response = await fetch(url);
 
 // Storing data in form of JSON
 var data = await response.json();
+console.log(data)
 if(data.homeworld != null ){
   const hWorld = await fetch(data.homeworld);
   var world = await hWorld.json();
    this.wname = world.name;
-  console.log(world.name)
+  // console.log(world.name)
 
 }
 
-const films = await fetch(data.films[0]);
-var film = await films.json();
+//films
+if(data.films != null ){
+  this.filmsMap = new Map();
 
-console.log(film)
+  for(i=0;i<data.films.length;i++){
+    const films = await fetch(data.films[i]);
+  var film = await films.json();
+  this.filmsMap.set(data.films[i],film.title)
+  
+  }
+
+  // console.log(filmsMap.get(data.films[0]))
+}
+
+
+
+//films
+if(data.vehicles != null ){
+  this.vehiclesMap = new Map();
+
+  for(i=0;i<data.vehicles.length;i++){
+    const vehicles = await fetch(data.vehicles[i]);
+  var vehicle = await vehicles.json();
+  this.vehiclesMap.set(data.vehicles[i],vehicle.name)
+  
+  }
+  console.log(vehicle.name)
+}
+
+
 
 
 if (response) {
@@ -75,9 +102,17 @@ let tab =
 
 <tr> 
 <td>${this.wname} </td>
-<td>${data.films}</td>
+<td>`
+for(i=0;i<data.films.length;i++){
+  tab+=`<a href="${data.films[i]}">${this.filmsMap.get(data.films[i])}</a> <br/>`;
+}`</td>`;
+tab+=`
 <td>${data.species}</td> 
-<td>${data.vehicles}</td>
+<td>`
+for(i=0;i<data.vehicles.length;i++){
+  tab+=`<a href="${data.vehicles[i]}">${this.vehiclesMap.get(data.vehicles[i])}</a> <br/>`;
+}`</td>`;
+tab+=`
 <td>${data.starships}</td>
 <td>${data.eye_color}</td>          
 <td>${data.birth_year}</td>          
