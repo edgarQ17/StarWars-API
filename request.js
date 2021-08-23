@@ -35,7 +35,7 @@ if(data.films != null ){
 
 
 
-//films
+//vehicles
 if(data.vehicles != null ){
   this.vehiclesMap = new Map();
 
@@ -45,7 +45,21 @@ if(data.vehicles != null ){
   this.vehiclesMap.set(data.vehicles[i],vehicle.name)
   
   }
-  console.log(vehicle.name)
+  // console.log(vehicle.name)
+}
+
+
+//starships
+if(data.starships != null ){
+  this.ShipMap = new Map();
+
+  for(i=0;i<data.starships.length;i++){
+    const ships = await fetch(data.starships[i]);
+  var ship = await ships.json();
+  this.ShipMap.set(data.starships[i],ship.name)
+  
+  }
+  // console.log(ship.name)
 }
 
 
@@ -113,10 +127,11 @@ for(i=0;i<data.vehicles.length;i++){
   tab+=`<a href="${data.vehicles[i]}">${this.vehiclesMap.get(data.vehicles[i])}</a> <br/>`;
 }`</td>`;
 tab+=`
-<td>${data.starships}</td>
-<td>${data.eye_color}</td>          
-<td>${data.birth_year}</td>          
-<td>${data.gender}</td>          
+<td>`
+for(i=0;i<data.starships.length;i++){
+  tab+=`<a href="${data.starships[i]}">${this.ShipMap.get(data.starships[i])}</a> <br/>`;
+}`</td>`;
+tab+=`      
 </tr>
 `;
 // }
