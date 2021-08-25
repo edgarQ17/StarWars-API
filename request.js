@@ -9,12 +9,14 @@ async function getapi(url) {
 const response = await fetch(url);
 
 // Storing data in form of JSON
-var data = await response.json();
-console.log(data)
+ this.data = await response.json();
+
+
+
 if(data.homeworld != null ){
   const hWorld = await fetch(data.homeworld);
-  var world = await hWorld.json();
-   this.wname = world.name;
+   this.world = await hWorld.json();
+  //  this.wname = world.name;
   // console.log(world.name)
 
 }
@@ -45,7 +47,7 @@ if(data.vehicles != null ){
   this.vehiclesMap.set(data.vehicles[i],vehicle.name)
   
   }
-  // console.log(vehicle.name)
+  // console.log(vehicle)
 }
 
 
@@ -79,6 +81,7 @@ function hideloader() {
 document.getElementById('loading').style.display = 'none';
 }
 // Function to define innerHTML for HTML table
+
 function show(data) {
 let tab = 
   `<tr>
@@ -115,7 +118,7 @@ let tab =
 </tr>
 
 <tr> 
-<td>${this.wname} </td>
+<td>${this.world.name} </td>
 <td>`
 for(i=0;i<data.films.length;i++){
   tab+=`<a href="${data.films[i]}">${this.filmsMap.get(data.films[i])}</a> <br/>`;
@@ -124,7 +127,7 @@ tab+=`
 <td>${data.species}</td> 
 <td>`
 for(i=0;i<data.vehicles.length;i++){
-  tab+=`<a href="${data.vehicles[i]}">${this.vehiclesMap.get(data.vehicles[i])}</a> <br/>`;
+  tab+=`<button onclick="sayHi(${i})">${this.vehiclesMap.get(data.vehicles[i])}</button>`;     ///ref the website and a function that sends the data 
 }`</td>`;
 tab+=`
 <td>`
@@ -134,9 +137,20 @@ for(i=0;i<data.starships.length;i++){
 tab+=`      
 </tr>
 `;
+
+
+
+
+
 // }
 // Setting innerHTML as tab variable
 document.getElementById("chName").innerHTML =`<h1>${data.name}</h1>` ;
 document.getElementById("character").innerHTML = tab;
 
 } 
+function sayHi(z){
+  var vehicless = data.vehicles[z];
+  localStorage.setItem("passVehicle",vehicless)
+  }
+
+// export let Name = (name) => {return "My name is " + name;}
