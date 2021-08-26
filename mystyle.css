@@ -1,12 +1,60 @@
 
-body {
-   /* background-image: url('stars.jpg'); */
-  }
-  .card{
-margin: auto;
-width: 50%;
-
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
+  .bg-image {
+    /* The image used */
+    background-image: url("vader.jpg");
+    
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    
+    /* Full height */
+    height: 100%; 
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+.bg-nav{
+ 
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width:100%;
+  /* padding: 20px; */
+  text-align: center;
+}
+  .bg-text {
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: rgb(4, 15, 173);
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width:auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+
+
+
+
+
+ 
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -18,10 +66,16 @@ table {
     text-align: left;
     padding: 8px;
   }
-  
+  th{
+    color: rgb(0, 0, 0);
+  }
+  tr:nth-child(odd) {
+    background-color: #a7a6a6;
+  }
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+
 
 ul {
     list-style-type: none;
@@ -39,7 +93,7 @@ ul {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 22px;
     text-decoration: none;
   }
   
@@ -47,14 +101,51 @@ ul {
   li a:hover {
     background-color: rgb(43, 51, 168);
   }
+  li a.active {
+    background-color: #2196F3;
+    color: white;
+  }
 
 
-  /* .form {
-    width: 100px;
-    clear: both;
+  .bg-nav .search-container {
+    float: right;
   }
   
-  .form input {
-    width:200%;
-    clear: both;
-  } */
+  .bg-nav input[type=text] {
+    padding: 6px;
+    margin-top: 20px;
+    font-size: 17px;
+    border: none;
+  }
+  
+  .bg-nav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 20px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .bg-nav .search-container button:hover {
+    background: #ccc;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .bg-nav .search-container {
+      float: none;
+    }
+    .bg-nav a, .bg-nav input[type=text], .bg-nav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+    .bg-nav input[type=text] {
+      border: 1px solid #ccc;  
+    }
+  }
