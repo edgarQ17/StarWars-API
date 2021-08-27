@@ -1,6 +1,15 @@
 
-const api_url = 
-"https://swapi.dev/api/people/1/";
+
+var btn = document.getElementById("searchS");
+
+btn.addEventListener("click", createSearch);
+
+function createSearch(){
+    var x = document.getElementById("idText").value;
+    var url =`https://swapi.dev/api/people/${x}/`;
+    getapi(url);
+
+}
 
 // Defining async function
 async function getapi(url) {
@@ -66,7 +75,6 @@ if(data.starships != null ){
 
 
 
-
 if (response) {
   hideloader();
   
@@ -121,7 +129,7 @@ let tab =
 <td>${this.world.name} </td>
 <td>`
 for(i=0;i<data.films.length;i++){
-  tab+=`<a href="${data.films[i]}">${this.filmsMap.get(data.films[i])}</a> <br/>`;
+  tab+=`<p><a href="${data.films[i]}">${this.filmsMap.get(data.films[i])}</a></p>`;
 }`</td>`;
 tab+=`
 <td>${data.species}</td> 
@@ -151,6 +159,8 @@ document.getElementById("character").innerHTML = tab;
 function sayHi(z){
   var vehicless = data.vehicles[z];
   localStorage.setItem("passVehicle",vehicless)
+  location.replace("films.html")
+
   }
 
 // export let Name = (name) => {return "My name is " + name;}
