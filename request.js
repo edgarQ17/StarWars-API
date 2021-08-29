@@ -30,6 +30,8 @@ const response = await fetch(url);
 if(data.homeworld != null ){
   const hWorld = await fetch(data.homeworld);
    this.world = await hWorld.json();
+   this.planet =[];
+   this.planet[0]=data.homeworld;
   //  this.wname = world.name;
   // console.log(world.name)
 
@@ -145,7 +147,7 @@ let tab =
 </tr>
 
 <tr> 
-<td>${this.world.name} </td>
+<td><button onclick="setPlanet(${0})"><p>${this.world.name}</p></button> </td>
 <td>`
 for(i=0;i<data.films.length;i++){
   tab+=`<button onclick="setFilm(${i})"><p>${this.filmsMap.get(data.films[i])}</p></button>`;
@@ -164,7 +166,7 @@ for(i=0;i<data.vehicles.length;i++){
 tab+=`
 <td>`
 for(i=0;i<data.starships.length;i++){
-  tab+=`<a href="${data.starships[i]}">${this.ShipMap.get(data.starships[i])}</a> <br/>`;
+  tab+=`<button onclick="setStarShip(${i})">${this.ShipMap.get(data.starships[i])}</button> <br/>`;
 }`</td>`;
 tab+=`      
 </tr>
@@ -192,5 +194,19 @@ function sayHi(z){
   location.replace("vehicles.html")
 
   }
+  function setStarShip(z){
+    var starShip = data.starships[z];
+    localStorage.setItem("pStarShip",starShip)
+    location.replace("starships.html")
+  
+    }
+    function setPlanet(z){
+      var planet = this.planet[z];
+      localStorage.setItem("passPlanet",planet)
+      location.replace("planets.html")
+    
+      }
+
+
 
 // export let Name = (name) => {return "My name is " + name;}

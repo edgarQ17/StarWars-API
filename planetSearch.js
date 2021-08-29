@@ -1,16 +1,17 @@
 
-    var vehicleQuery = localStorage.getItem("passVehicle");
+    var planetQuery = localStorage.getItem("passPlanet");
     var btn = document.getElementById("searchS");
-
+console.log(planetQuery)
     if(btn.addEventListener("click",   createSearch)){
     }
     else{
-      getapi(vehicleQuery)
+      getapi(planetQuery)
     }
     function createSearch(){
         var x = document.getElementById("idText").value;
-        var url =`https://swapi.dev/api/vehcles/${x}/`;
-        localStorage.getItem("passVehicle",url);
+        var url =`https://swapi.dev/api/planets/${x}/`;
+
+        localStorage.getItem("passPlanet",url);
         getapi(url);
     
     }
@@ -42,13 +43,13 @@
     
     
     //vehicles
-    if(data.pilots != null ){
-      this.pilotsMap = new Map();
+    if(data.residents != null ){
+      this.residentMap = new Map();
     
-      for(i=0;i<data.pilots.length;i++){
-        const pilots = await fetch(data.pilots[i]);
-      var pilot = await pilots.json();
-      this.pilotsMap.set(data.pilots[i],pilot.name)
+      for(i=0;i<data.residents.length;i++){
+        const residents = await fetch(data.residents[i]);
+      var resident = await residents.json();
+      this.residentMap.set(data.residents[i],resident.name)
       
       }
     //   console.log(pilot)
@@ -75,49 +76,45 @@
         let tab = 
         `<tr>
           <th>Name</th>
-          <th>Model</th> 
-          <th>Manufacturer</th>
-          <th>Cost in Credits</th>
-          <th>Length</th>
-          <th>Cargo capacity</th>
-          <th>Consumables</th>
+          <th>Rotation Period</th> 
+          <th>Orbital Period</th>
+          <th>Diameter</th>
+          <th>Climate</th>
+          <th>Gravity capacity</th>
+          <th>Terrain</th>
          </tr>`;
     // Loop to access all rows 
     // for (let r of data.list) {
             tab += `<tr> 
         <td>${data.name} </td>
-        <td>${data.model}</td> 
-        <td>${data.manufacturer}</td> 
-        <td>${data.cost_in_credits}</td>
-        <td>${data.length}</td>          
-        <td>${data.cargo_capacity}</td>
-        <td>${data.consumables}</td>          
+        <td>${data.rotation_period}</td> 
+        <td>${data.orbital_period}</td> 
+        <td>${data.diameter}</td>
+        <td>${data.climate}</td>          
+        <td>${data.gravity}</td>
+        <td>${data.terrain}</td>          
     </tr>`;
     tab += 
     `<tr>
-      <th>Crew</th>
+      <th>Surface Water</th>
+      <th>Population</th>
       <th>Films</th> 
-      <th>Max Atmosphering Speed</th>
-      <th>Passengers</th>
-      <th>Pilots</th>
-      <th>Vehicle Class</th>
+      <th>Residents</th>
      </tr>
      <tr> 
-<td>${data.crew} </td>
+<td>${data.surface_water} </td>
+<td>${data.population}</td>      
 <td>`
 console.log(data.films.length)
 for(i=0;i<data.films.length;i++){
 tab+=`<button onclick="setFilm(${i})"><p>${this.filmsMap.get(this.data.films[i])}</p></button>`;     ///ref the website and a function that sends the data 
 }`</td>`;
 tab+=`
-<td>${data.max_atmosphering_speed}</td> 
-<td>${data.passengers}</td>
 <td>`
-for(i=0;i<data.pilots.length;i++){
-tab+=`<button onclick="setCharacter(${i})"><p>${this.pilotsMap.get(this.data.pilots[i])}</p></button>`;     ///ref the website and a function that sends the data 
+for(i=0;i<data.residents.length;i++){
+tab+=`<button onclick="setCharacter(${i})"><p>${this.residentMap.get(this.data.residents[i])}</p></button>`;     ///ref the website and a function that sends the data 
 }`</td>`;
 tab+=`  
-<td>${data.vehicle_class}</td>      
 </tr>`;
 
 // Setting innerHTML as tab variable
@@ -131,7 +128,7 @@ document.getElementById("character").innerHTML = tab;
     
       }
       function setCharacter(z){
-        var character = data.pilots[z];
+        var character = data.residents[z];
         localStorage.setItem("passCh",character)
         location.replace("index.html")
       

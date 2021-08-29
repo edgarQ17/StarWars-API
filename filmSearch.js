@@ -143,11 +143,11 @@ tab +=
  </tr>
  <tr><td>`
  for(i=0;i<data.planets.length;i++){
-    tab+=`<button onclick=""><p>${this.planetsMap.get(this.data.planets[i])}</p></button>`;     ///ref the website and a function that sends the data 
+    tab+=`<button onclick="setPlanet(${i})"><p>${this.planetsMap.get(this.data.planets[i])}</p></button>`;     ///ref the website and a function that sends the data 
     }`</td>`;
     tab+=`<td>`
     for(i=0;i<data.starships.length;i++){
-    tab+=`<button onclick=""><p>${this.ShipMap.get(this.data.starships[i])}</p></button>`;     ///ref the website and a function that sends the data 
+    tab+=`<button onclick="setStarShip(${i})"><p>${this.ShipMap.get(this.data.starships[i])}</p></button>`;     ///ref the website and a function that sends the data 
     }`</td>`;
     tab+=`<td>`
     for(i=0;i<data.vehicles.length;i++){
@@ -179,3 +179,17 @@ function setVehicle(z){
     location.replace("index.html")
   
     }
+
+    function setStarShip(z){
+      var starShip = data.starships[z];
+      localStorage.setItem("pStarShip",starShip)
+      location.replace("starships.html")
+    
+      }
+
+      function setPlanet(z){
+        var planet = data.planets[z];
+        localStorage.setItem("passPlanet",planet)
+        location.replace("planets.html")
+      
+        }
