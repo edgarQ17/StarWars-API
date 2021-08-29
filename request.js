@@ -1,8 +1,12 @@
+var chQuery = localStorage.getItem("passCharacter");
 
 
 var btn = document.getElementById("searchS");
-
-btn.addEventListener("click", createSearch);
+if(btn.addEventListener("click",   createSearch)){
+}
+else{
+  getapi(chQuery)
+}
 
 function createSearch(){
     var x = document.getElementById("idText").value;
@@ -83,7 +87,7 @@ if (response) {
 show(data);
 }
 // Calling that async function
-getapi(api_url);
+// getapi(api_url);
 // Function to hide the loader
 function hideloader() {
 document.getElementById('loading').style.display = 'none';
@@ -159,7 +163,7 @@ document.getElementById("character").innerHTML = tab;
 function sayHi(z){
   var vehicless = data.vehicles[z];
   localStorage.setItem("passVehicle",vehicless)
-  location.replace("films.html")
+  location.replace("vehicles.html")
 
   }
 
