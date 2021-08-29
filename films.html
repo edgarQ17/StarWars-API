@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="mystyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+    <div class="bg-image"></div>
+
+    <ul class="bg-nav">
+        <li><a href="index.html">Characters</a></li>
+      <li><a class="active" href="javascript:void(0)">Films</a></li>
+      <li><a href="vehicles.html">Vehicles</a></li>
+      <div class="search-container">
+          <input type="text" placeholder="Search by ID.." id="idText">
+          <button id="searchS"><i class="fa fa-search"></i></button>
+      </div>
+    </ul>
+    <div class="bg-text">
+       
+        <script   src="filmSearch.js"></script>
+        <!-- <img src=".jpg" alt="Future Image of Character" width="400" height="300" > -->
+
+
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" 
+               role="status" id="loading">
+              <span class="sr-only">Loading...</span>
+          </div>
+      </div>
+      <h1 id="chName"></h1>
+        <table id="character">
+          </table>
+
+      </div>
+    
+    </body>
+</html>

@@ -1,4 +1,4 @@
-var chQuery = localStorage.getItem("passCharacter");
+var chQuery = localStorage.getItem("passCh");
 
 
 var btn = document.getElementById("searchS");
@@ -11,6 +11,7 @@ else{
 function createSearch(){
     var x = document.getElementById("idText").value;
     var url =`https://swapi.dev/api/people/${x}/`;
+    localStorage.setItem("passCh",url)
     getapi(url);
 
 }
@@ -47,7 +48,20 @@ if(data.films != null ){
 
   // console.log(filmsMap.get(data.films[0]))
 }
+// console.log(this.data)
+//Species
+if(data.species != null ){
+  this.speciesMap = new Map();
 
+  for(i=0;i<data.species.length;i++){
+    const species = await fetch(data.species[i]);
+  var speciesT = await species.json();
+  this.speciesMap.set(data.species[i],speciesT.name)
+  
+  }
+
+  // console.log(speciesT)
+}
 
 
 //vehicles
@@ -95,6 +109,7 @@ document.getElementById('loading').style.display = 'none';
 // Function to define innerHTML for HTML table
 
 function show(data) {
+  console.log(data)
 let tab = 
   `<tr>
     <th>Full Name</th>
@@ -133,10 +148,15 @@ let tab =
 <td>${this.world.name} </td>
 <td>`
 for(i=0;i<data.films.length;i++){
-  tab+=`<p><a href="${data.films[i]}">${this.filmsMap.get(data.films[i])}</a></p>`;
+  tab+=`<button onclick="setFilm(${i})"><p>${this.filmsMap.get(data.films[i])}</p></button>`;
 }`</td>`;
-tab+=`
-<td>${data.species}</td> 
+tab+= `
+<td>`
+for(i=0;i<data.species.length;i++){
+  tab+=`<p>${this.speciesMap.get(data.species[i])}</p>`;
+}`</td>`;
+tab+= `
+
 <td>`
 for(i=0;i<data.vehicles.length;i++){
   tab+=`<button onclick="sayHi(${i})">${this.vehiclesMap.get(data.vehicles[i])}</button>`;     ///ref the website and a function that sends the data 
@@ -160,6 +180,12 @@ document.getElementById("chName").innerHTML =`<h1>${data.name}</h1>` ;
 document.getElementById("character").innerHTML = tab;
 
 } 
+function setFilm(z){
+  var films = data.films[z];
+  localStorage.setItem("passFilm",films)
+  location.replace("films.html")
+
+  }
 function sayHi(z){
   var vehicless = data.vehicles[z];
   localStorage.setItem("passVehicle",vehicless)

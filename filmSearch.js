@@ -1,131 +1,181 @@
+var filmQuery = localStorage.getItem("passFilm");
+var btn = document.getElementById("searchS");
 
-    var vehicleQuery = localStorage.getItem("passVehicle");
-    var btn = document.getElementById("searchS");
+if(btn.addEventListener("click",   createSearch)){
+}
+else{
+  getapi(filmQuery)
+}
+function createSearch(){
+    var x = document.getElementById("idText").value;
+    var url =`https://swapi.dev/api/films/${x}/`;
+    localStorage.setItem("passFilm",url)
+    getapi(url);
 
-    if(btn.addEventListener("click",   createSearch)){
-    }
-    else{
-      getapi(vehicleQuery)
-    }
-    function createSearch(){
-        var x = document.getElementById("idText").value;
-        var url =`https://swapi.dev/api/vehcles/${x}/`;
-        getapi(url);
+}
+
+// Defining async function
+async function getapi(url) {
+ 
+// Storing response
+const response = await fetch(url);
+
+// Storing data in form of JSON
+ this.data = await response.json();
+
+
+
+ ////Characters
+ if(data.characters != null ){
+    this.chMap = new Map();
+  
+    for(i=0;i<data.characters.length;i++){
+      const characters = await fetch(data.characters[i]);
+    var character = await characters.json();
+    this.chMap.set(data.characters[i],character.name)
     
     }
-    
-    // Defining async function
-    async function getapi(url) {
-     
-    // Storing response
-    const response = await fetch(url);
-    
-    // Storing data in form of JSON
-     this.data = await response.json();
-    
-    //films
-    console.log(this.data)
-    if(data.films != null ){
-      this.filmsMap = new Map();
-    
-      for(i=0;i<data.films.length;i++){
-        const films = await fetch(data.films[i]);
-      var film = await films.json();
-      this.filmsMap.set(data.films[i],film.title)
-      
-      }
-    
-      // console.log(filmsMap.get(data.films[0]))
-    }
-    
-    
-    
-    //vehicles
-    if(data.pilots != null ){
-      this.pilotsMap = new Map();
-    
-      for(i=0;i<data.pilots.length;i++){
-        const pilots = await fetch(data.pilots[i]);
-      var pilot = await pilots.json();
-      this.pilotsMap.set(data.pilots[i],pilot.name)
-      
-      }
-    //   console.log(pilot)
-    }
-    
-    
-    
-    if (response) {
-      hideloader();
-      
+  
+    // console.log(speciesT)
+  }
+
+
+
+//Species
+if(data.species != null ){
+    this.speciesMap = new Map();
+  
+    for(i=0;i<data.species.length;i++){
+      const species = await fetch(data.species[i]);
+    var speciesT = await species.json();
+    this.speciesMap.set(data.species[i],speciesT.name)
     
     }
-    show(data);
-    }
-    // Calling that async function
-    // getapi(api_url);
-    // Function to hide the loader
-    function hideloader() {
-    document.getElementById('loading').style.display = 'none';
-    }
-    // Function to define innerHTML for HTML table
+  
+    // console.log(speciesT)
+  }
+  
+  
+  //vehicles
+  if(data.vehicles != null ){
+    this.vehiclesMap = new Map();
+  
+    for(i=0;i<data.vehicles.length;i++){
+      const vehicles = await fetch(data.vehicles[i]);
+    var vehicle = await vehicles.json();
+    this.vehiclesMap.set(data.vehicles[i],vehicle.name)
     
-    function show(data) {
-        let tab = 
-        `<tr>
-          <th>Name</th>
-          <th>Model</th> 
-          <th>Manufacturer</th>
-          <th>Cost in Credits</th>
-          <th>Length</th>
-          <th>Cargo capacity</th>
-          <th>Consumables</th>
-         </tr>`;
-    // Loop to access all rows 
-    // for (let r of data.list) {
-            tab += `<tr> 
-        <td>${data.name} </td>
-        <td>${data.model}</td> 
-        <td>${data.manufacturer}</td> 
-        <td>${data.cost_in_credits}</td>
-        <td>${data.length}</td>          
-        <td>${data.cargo_capacity}</td>
-        <td>${data.consumables}</td>          
-    </tr>`;
-    tab += 
+    }
+    // console.log(vehicle)
+  }
+   //planets
+   if(data.planets != null ){
+    this.planetsMap = new Map();
+  
+    for(i=0;i<data.planets.length;i++){
+      const planets = await fetch(data.planets[i]);
+    var planet = await planets.json();
+    this.planetsMap.set(data.planets[i],planet.name)
+    
+    }
+    // console.log(vehicle)
+  }
+  
+
+//starships
+if(data.starships != null ){
+    this.ShipMap = new Map();
+  
+    for(i=0;i<data.starships.length;i++){
+      const ships =  await fetch(data.starships[i]);
+    var ship = await ships.json();
+    this.ShipMap.set(data.starships[i],ship.name)
+    
+    }
+    // console.log(ship.name)
+  }
+
+
+
+if (response) {
+  hideloader();
+  
+
+}
+show(data);
+}
+// Calling that async function
+// getapi(api_url);
+// Function to hide the loader
+function hideloader() {
+document.getElementById('loading').style.display = 'none';
+}
+// Function to define innerHTML for HTML table
+
+function show(data) {
+    let tab = 
     `<tr>
-      <th>Crew</th>
-      <th>Films</th> 
-      <th>Max Atmosphering Speed</th>
-      <th>Passengers</th>
-      <th>Pilots</th>
-      <th>Vehicle Class</th>
-     </tr>
-     <tr> 
-<td>${data.crew} </td>
-<td>`
-console.log(data.films.length)
-for(i=0;i<data.films.length;i++){
-tab+=`<button onclick="sayHi(${i})"><p>${this.filmsMap.get(this.data.films[i])}</p></button>`;     ///ref the website and a function that sends the data 
-}`</td>`;
-tab+=`
-<td>${data.max_atmosphering_speed}</td> 
-<td>${data.passengers}</td>
-<td>`
-for(i=0;i<data.pilots.length;i++){
-tab+=`<p>${this.pilotsMap.get(this.data.pilots[i])}</p>`;     ///ref the website and a function that sends the data 
-}`</td>`;
-tab+=`  
-<td>${data.vehicle_class}</td>          s
+      <th>Title</th>
+      <th>Episode ID</th> 
+      <th>Opening Crawl</th>
+      <th>Director</th>
+      <th>Producer</th>
+      <th>Release Date</th>
+     </tr>`;
+// Loop to access all rows 
+// for (let r of data.list) {
+        tab += `<tr> 
+    <td>${data.title} </td>
+    <td>${data.episode_id}</td> 
+    <td>${data.opening_crawl}</td> 
+    <td>${data.director}</td>
+    <td>${data.producer}</td>          
+    <td>${data.release_date}</td>
 </tr>`;
+tab += 
+`<tr>
+  <th>Planets</th>
+  <th>Starships</th> 
+  <th>Vehicles</th>
+  <th>Species</th>
+  <th>Characters</th>
+
+ </tr>
+ <tr><td>`
+ for(i=0;i<data.planets.length;i++){
+    tab+=`<button onclick=""><p>${this.planetsMap.get(this.data.planets[i])}</p></button>`;     ///ref the website and a function that sends the data 
+    }`</td>`;
+    tab+=`<td>`
+    for(i=0;i<data.starships.length;i++){
+    tab+=`<button onclick=""><p>${this.ShipMap.get(this.data.starships[i])}</p></button>`;     ///ref the website and a function that sends the data 
+    }`</td>`;
+    tab+=`<td>`
+    for(i=0;i<data.vehicles.length;i++){
+    tab+=`<button onclick="setVehicle(${i})"><p>${this.vehiclesMap.get(this.data.vehicles[i])}</p></button>`;     ///ref the website and a function that sends the data 
+    }`</td>`;
+    tab+=`<td>`
+    for(i=0;i<data.species.length;i++){
+    tab+=`<button onclick=""><p>${this.speciesMap.get(this.data.species[i])}</p></button>`;     ///ref the website and a function that sends the data 
+    }`</td>`;
+    tab+=`<td>`
+for(i=0;i<data.characters.length;i++){
+tab+=`<button onclick="setCharacter(${i})"><p>${this.chMap.get(this.data.characters[i])}</p></button>`;     ///ref the website and a function that sends the data 
+}`</td>`;
+
 
 // Setting innerHTML as tab variable
-document.getElementById("chName").innerHTML =`<h1>${data.name}</h1>` ;
+document.getElementById("chName").innerHTML =`<h1>${data.title}</h1>` ;
 document.getElementById("character").innerHTML = tab;
 }
-    function sayHi(z){
-      var films = data.films[z];
-      localStorage.setItem("passFilm",films)
-      location.replace("films.html")
-    
-      }
+function setVehicle(z){
+    var vehicless = data.vehicles[z];
+    localStorage.setItem("passVehicle",vehicless)
+    location.replace("vehicles.html")
+  
+    }
+  function setCharacter(z){
+    var character = data.characters[z];
+    localStorage.setItem("passCh",character)
+    location.replace("index.html")
+  
+    }
