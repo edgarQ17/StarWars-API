@@ -7,11 +7,16 @@ else{
   getapi(starShipQuery)
 }
 function createSearch(){
-    var x = document.getElementById("idText").value;
+  var x = document.getElementById("idText").value;
+  parseInt(x)
+  if(x>0 ){
     var url =`https://swapi.dev/api/starships/${x}/`;
     localStorage.getItem("pStarShip",url);
     getapi(url);
-
+  }
+  else {
+    alert("enter a valid integer! and greater than 0");
+  }
 }
 
 // Defining async function

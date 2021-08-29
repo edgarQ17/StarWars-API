@@ -8,11 +8,20 @@
       getapi(vehicleQuery)
     }
     function createSearch(){
-        var x = document.getElementById("idText").value;
+      var x = document.getElementById("idText").value;
+
+      parseInt(x)
+      if(x>0 ){
+        
         var url =`https://swapi.dev/api/vehcles/${x}/`;
         localStorage.getItem("passVehicle",url);
         getapi(url);
+      }
+      else {
+        alert("enter a valid integer! and greater than 0");
     
+      }
+        
     }
     
     // Defining async function

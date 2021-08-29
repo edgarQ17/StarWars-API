@@ -9,10 +9,18 @@ else{
 }
 
 function createSearch(){
-    var x = document.getElementById("idText").value;
+  var x = document.getElementById("idText").value;
+  parseInt(x)
+  if(x>0 ){
     var url =`https://swapi.dev/api/people/${x}/`;
     localStorage.setItem("passCh",url)
     getapi(url);
+
+  }
+  else {
+    alert("enter a valid integer! and greater than 0");
+
+  }
 
 }
 
@@ -111,7 +119,7 @@ document.getElementById('loading').style.display = 'none';
 // Function to define innerHTML for HTML table
 
 function show(data) {
-  console.log(data)
+  // console.log(data)
 let tab = 
   `<tr>
     <th>Full Name</th>

@@ -8,12 +8,18 @@ console.log(planetQuery)
       getapi(planetQuery)
     }
     function createSearch(){
-        var x = document.getElementById("idText").value;
-        var url =`https://swapi.dev/api/planets/${x}/`;
+      var x = document.getElementById("idText").value;
 
+      parseInt(x)
+      if(x>0 ){
+        var url =`https://swapi.dev/api/planets/${x}/`;
         localStorage.getItem("passPlanet",url);
         getapi(url);
-    
+      }
+      else {
+        alert("enter a valid integer! and greater than 0");
+      }
+
     }
     
     // Defining async function
